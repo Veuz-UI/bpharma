@@ -99,9 +99,14 @@ $(document).ready(function(){
 
 // ആക്ടീവ് കാർഡ് കണ്ടെത്തി Active Style (large/dark) നൽകാനുള്ള ഫംഗ്ഷൻ.
 function updateActiveItem($carousel) {
-    // 768px ന് താഴെ autoWidth: false ആയതുകൊണ്ട് ഈ ലോജിക് ഒഴിവാക്കുന്നു
-    if ($(window).width() < 768) return; 
+    // 768px-ന് താഴെ ഈ ലോജിക് ഒഴിവാക്കുന്നു (കാരണം മൊബൈലിൽ എല്ലാം active ആകണം)
+    if ($(window).width() < 768) {
+        // മൊബൈൽ/ടാബ്ലെറ്റ് വ്യൂവിൽ: എല്ലാ ഐറ്റത്തിനും active ക്ലാസ് ചേർക്കുന്നു
+        $carousel.find('.item').addClass('active');
+        return;
+    }
 
+    // ഡെസ്ക്ടോപ്പ് വ്യൂ ലോജിക് (AutoWidth-ന് വേണ്ടി)
     $carousel.find('.item').removeClass("active");
 
     // .owl-item.active-ൽ ഇടതുവശത്ത് കാണുന്ന ആദ്യത്തെ ഐറ്റം കണ്ടെത്തുന്നു
@@ -118,7 +123,6 @@ $(document).ready(function () {
 
     // 1. Carousel Initialization: 
     $carousel.owlCarousel({
-        // ഡിസൈനിലെ Fixed width Cards (700px + 320px + ...) കാണിക്കാൻ autoWidth: true ഉപയോഗിക്കുന്നു.
         autoWidth: true,
         loop: true,
         dots: false,
@@ -128,40 +132,43 @@ $(document).ready(function () {
         autoplayHoverPause: true,
         margin: 15,
         
-        // സ്ലൈഡിംഗ് വേഗത 600ms ആയി സജ്ജീകരിക്കുന്നു
         slideSpeed: 600, 
         dragEndSpeed: 600, 
         
-        // മൊബൈൽ റെസ്പോൺസീവ് ഓപ്ഷൻ: 1.5 കാർഡ് കാണിക്കാൻ
+        // മൊബൈൽ റെസ്പോൺസീവ് ഓപ്ഷൻ
         responsive: {
             0: { 
-                items: 1.5, 
-                autoWidth: false, // മൊബൈലിൽ autoWidth ഒഴിവാക്കുന്നു
+                // മൊബൈലിൽ 1.1 ഐറ്റം കാണിക്കുന്നു, പക്ഷെ എല്ലാം active ആയിരിക്കും
+                items: 1.1, 
+                autoWidth: false, 
                 margin: 10,
             },
             768: { 
-                autoWidth: true, // ഡെസ്ക്ടോപ്പിൽ autoWidth ഉപയോഗിക്കുന്നു
-                items: 3, 
+                autoWidth: false, 
+                items: 2, 
+                margin: 15,
+            },
+            991: { 
+                autoWidth: false, 
+                items: 2, 
+                margin: 15,
+            },
+             1024: { 
+                autoWidth: true, 
+                items: 3.2, 
                 margin: 15,
             }
         },
 
         onInitialized: function (event) {
             // കാറൗസൽ ലോഡ് ചെയ്യുമ്പോൾ active ഐറ്റം സെറ്റ് ചെയ്യുന്നു
-            if ($(window).width() >= 768) {
-                updateActiveItem($carousel);
-            } else {
-                // മൊബൈലിൽ ആദ്യത്തെ ഐറ്റത്തിനെ active ആക്കുന്നു
-                $carousel.find('.item').removeClass("active");
-                $carousel.find('.item').first().addClass("active");
-            }
+            // മൊബൈലിൽ എല്ലാ ഐറ്റവും active ആകും
+            updateActiveItem($carousel); 
         },
         
         onResized: function (event) {
              // സൈസ് മാറുമ്പോൾ active ഐറ്റം ലോജിക് വീണ്ടും വിളിക്കുന്നു
-            if ($(window).width() >= 768) {
-                updateActiveItem($carousel);
-            }
+            updateActiveItem($carousel); 
         }
     });
 
@@ -170,55 +177,56 @@ $(document).ready(function () {
     // 2. Custom Navigation Buttons: 
     $('.custom-prev-btn').on('click', function() {
         owl.prev();
-        // 50ms ഡിലേ നൽകുന്നു (CSS transition-മായി മാച്ച് ചെയ്യാൻ)
-        setTimeout(() => { updateActiveItem($carousel); }, 50); 
+        // ഡെസ്ക്ടോപ്പിൽ ചെറിയ ഡിലേ നൽകുന്നു
+        if ($(window).width() >= 768) {
+            setTimeout(() => { updateActiveItem($carousel); }, 50); 
+        }
     });
 
     $('.custom-next-btn').on('click', function() {
         owl.next();
-        // 50ms ഡിലേ നൽകുന്നു
-        setTimeout(() => { updateActiveItem($carousel); }, 50); 
+        // ഡെസ്ക്ടോപ്പിൽ ചെറിയ ഡിലേ നൽകുന്നു
+        if ($(window).width() >= 768) {
+            setTimeout(() => { updateActiveItem($carousel); }, 50); 
+        }
     });
     
-    // 3. Item Click Handler: ക്ലിക്കിൽ active ആകാനും scroll ചെയ്യാനും
+    // 3. Item Click Handler:
     $carousel.on('click', '.item', function () {
         const $this = $(this);
         
-        // 768px ന് മുകളിൽ മാത്രം autoWidth ലോജിക് ഉപയോഗിക്കുക
+        // ഡെസ്ക്ടോപ്പിൽ മാത്രം active ക്ലാസ് മാറ്റുക
         if ($(window).width() >= 768) {
             $carousel.find('.item').removeClass("active");
             $this.addClass("active");
+            
+            const clickedIndex = $this.closest('.owl-item').index();
+            owl.to(clickedIndex, 600); 
         } else {
-            // മൊബൈലിൽ, ക്ലിക്ക് ചെയ്യുമ്പോൾ തന്നെ active ആക്കുക
-            $carousel.find('.item').removeClass("active");
-            $this.addClass("active");
+            // മൊബൈലിൽ ക്ലിക്കിൽ ഒന്നും ചെയ്യേണ്ട, എല്ലാം default ആയി active ആണ്
         }
-        
-        const clickedIndex = $this.closest('.owl-item').index();
-        // സ്ലൈഡിംഗ് സമയം 600ms ആയി സജ്ജീകരിക്കുന്നു
-        owl.to(clickedIndex, 600); 
     });
 
-    // 4. Slide Transition End: സ്ലൈഡ് ചെയ്ത ശേഷം active ക്ലാസ് മാറ്റുന്നതിന്
+    // 4. Slide Transition End:
     $carousel.on('translated.owl.carousel', function (event) {
+        // ഇവിടെ മൊബൈലിലെ active ക്ലാസ് മാറ്റുന്ന ലോജിക് ആവശ്യമില്ല. 
+        // കാരണം, മൊബൈലിൽ എല്ലാ ഐറ്റവും active ആയി നിലനിർത്താനാണ് പുതിയ തീരുമാനം.
         if ($(window).width() >= 768) {
             updateActiveItem($carousel);
-        } else {
-            // മൊബൈലിൽ (autoWidth: false) നിലവിലെ ഐറ്റത്തിനെ active ആക്കുന്നു
-            const current = event.item.index;
-            $carousel.find('.item').removeClass("active");
-            $carousel.find('.owl-item').eq(current).find('.item').addClass('active');
-        }
+        } 
     });
     
     // നാവിഗേഷൻ ബട്ടണുകൾ active/inactive ആക്കുന്നത്
     $carousel.on('changed.owl.carousel', function(event) {
-         $('.custom-carousel-nav button').removeClass('active-btn');
-         if (event.direction === 'prev') {
-             $('.custom-prev-btn').addClass('active-btn');
-         } else {
-             $('.custom-next-btn').addClass('active-btn');
-         }
+         // ഡെസ്ക്ടോപ്പ് നാവിഗേഷൻ സ്റ്റൈലിനായുള്ള ലോജിക് നിലനിർത്തുന്നു
+        if ($(window).width() >= 768) {
+             $('.custom-carousel-nav button').removeClass('active-btn');
+             if (event.direction === 'prev') {
+                 $('.custom-prev-btn').addClass('active-btn');
+             } else {
+                 $('.custom-next-btn').addClass('active-btn');
+             }
+        }
     });
     
 });

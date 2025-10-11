@@ -6,6 +6,7 @@
 body {
   font-family: "Mulish", sans-serif !important;
   background-color: #F5F5F5;
+  overflow-x: hidden !important;
 }
 
 /* nav */
@@ -46,7 +47,7 @@ body {
   background-color: #ffffff;
   border-radius: 50px;
   padding: 5px 10px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 12px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
@@ -80,7 +81,7 @@ body {
   background-image: url('../img/bg.png');
   background-size: cover;
   background-position: center;
-  height: 90vh;
+  height: 100vh;
   width: 100%;
   display: flex;
   align-items: center;
@@ -467,6 +468,23 @@ p.section-description {
 
 
 @media (max-width: 768px) {
+
+  .header-content{
+    flex-direction: column;
+    gap: 1rem !important;
+    align-items: start !important;
+  }
+  .header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: start !important;
+    margin-bottom: 50px;
+    flex-direction: column;
+}
+
+  .home_bg{
+    height: 900px;
+  }
   .service-card {
     flex-direction: column;
   }
@@ -507,7 +525,7 @@ p.section-description {
 .main-title {
   color: #0d9488;
   font-size: 3rem;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.2;
   margin-bottom: 25px;
 }
@@ -703,7 +721,7 @@ p.section-description {
   }
 }
 
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 992px) and (max-width: 1550px) {
   .nav-section {
     width: 100% !important;
   }
@@ -852,6 +870,25 @@ p.section-description {
 }
 
 @media (max-width: 991px) {
+
+  .game-section .item-content .number{
+    font-size: 24px !important;
+  }
+  .game-section .item-content h3{
+    margin-bottom: 20px !important;
+font-size: 24px;
+    line-height: 26px;
+  }
+
+      .header-content {
+        flex-direction: column;
+        gap: 1rem !important;
+        align-items: start !important;
+    }
+
+  .game-section .container{
+    margin-right: auto !important;
+  }
   .expert-box {
     position: relative;
   }
@@ -970,13 +1007,13 @@ footer {
   color: #0d9488;
 }
 
-.header-nav li:not(:last-child)::after {
+/* .header-nav li:not(:last-child)::after {
   content: '|';
   position: absolute;
   right: -8px;
   color: #d1d5db;
   font-weight: 300;
-}
+} */
 
 
 /* --- Middle Section (Address & Contact) --- */
@@ -1129,7 +1166,9 @@ footer {
 }
 
 .header-content {
-  max-width: 700px;
+  max-width: 90%;
+  gap: 10rem;
+  align-items: center;
 }
 
 .header-content p {
@@ -1174,7 +1213,7 @@ background-color: #4D6184;
 
 .game-section .container{
   width: 100% !important;
-  margin-right: 0 !important;
+  margin-right: 0 ;
 }
 
 .game-section .item {

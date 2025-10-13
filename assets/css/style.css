@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.cdnfonts.com/css/academy-engraved-let');
+
 
 
 
@@ -229,11 +231,7 @@ body {
   display: inline-block;
   padding-right: 30px;
   background: transparent;
-  font-family: 'Academy Engraved LET Plain:1.0';
-  font-style: normal;
-  font-weight: normal;
-  src: local('Academy Engraved LET Plain:1.0'), url('/assets/font/AcademyEngravedLetPlain.woff') format('woff');
-}
+font-family: 'Academy Engraved LET', sans-serif;}
 
 @keyframes marquee {
   0% {

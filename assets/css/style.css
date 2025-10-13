@@ -120,23 +120,7 @@ body {
   overflow: hidden;
 }
 
- @media (min-width: 1200px) {
-      .navbar-expand-xl .navbar-collapse {
-        display: flex !important;
-      }
-      .navbar-expand-xl .navbar-toggler {
-        display: none !important;
-      }
-    }
-
-    @media (max-width: 1199.98px) {
-      /* .navbar-expand-xl .navbar-collapse {
-        display: none !important;
-      } */
-      .navbar-expand-xl .navbar-toggler {
-        display: block !important;
-      }
-    }
+ 
 
 
 
@@ -761,7 +745,7 @@ p.section-description {
 
   .page_nav_link .nav-item .nav-link {
     padding: 10px 0;
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .lang-switch {

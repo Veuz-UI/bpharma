@@ -63,7 +63,6 @@ body {
 
 .lang-switch .ar {
   color: #34405f;
-  /* dark navy */
 }
 
 .lang-switch .divider {
@@ -72,13 +71,10 @@ body {
 
 .lang-switch .en {
   color: #1e7d85;
-  /* teal color */
 }
 
-/* language switcher */
 
 
-/* home background */
 .home_bg {
   background-image: url('../img/bg.png');
   background-size: cover;
@@ -87,7 +83,6 @@ body {
   width: 100%;
   display: flex;
   align-items: center;
-  /* margin-top: 20px; */
 }
 
 
@@ -128,7 +123,6 @@ body {
 
 .owl-carousel .slide {
   width: 100%;
-  /* Owl Carousel ഇത് ഓട്ടോമാറ്റിക്കായി സെറ്റ് ചെയ്യും */
   background: #fff;
   border-radius: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
@@ -136,7 +130,6 @@ body {
   overflow: hidden;
   padding: 5px;
   margin: 0;
-  /* Owl Carousel-ൻ്റെ 'margin' ഉപയോഗിക്കാം */
 }
 
 .slide img {
@@ -154,15 +147,12 @@ body {
   margin: 0;
 }
 
-/* --- Custom Navigation Styles (Dots/Numbers) --- */
-/* Owl Carousel default navigation elements hide ചെയ്യുന്നു */
 .owl-dots,
 .owl-nav {
   display: none !important;
 }
 
 .custom-nav-wrapper {
-  /* നാവിഗേഷൻ കൺട്രോളുകൾ വെക്കാനുള്ള കണ്ടെയ്‌നർ */
   width: 100%;
   padding-top: 25px;
   display: flex;
@@ -170,7 +160,6 @@ body {
 }
 
 .slider-nav {
-  /* നിങ്ങളുടെ പഴയ നാവിഗേഷൻ സ്റ്റൈലുകൾ */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -178,7 +167,6 @@ body {
   font-weight: 600;
   user-select: none;
   margin-left: 25px;
-  /* Alignment with content */
 }
 
 .slider-nav span {
@@ -1431,31 +1419,22 @@ footer {
     height: auto;
     min-height: 450px;
 
-    /* Active സ്റ്റൈലുകൾ ഇവിടെ നൽകുക, അപ്പോൾ എല്ലാ ഐറ്റവും ഒരേപോലെയാകും */
     background: var(--color-primary);
-    /* #526182 ൻ്റെ സ്റ്റൈലുകൾ ഇവിടെ കോപ്പി ചെയ്യുക */
     color: #ffffff;
     display: flex;
     flex-direction: column;
-    /* ഇത് മൊബൈൽ സ്‌ക്രീൻ സ്റ്റൈലുമായി മാച്ച് ചെയ്യുന്നു */
     padding: 0;
   }
 
   .game-section .item-content {
     width: 100%;
-    /* active-ൽ ഉള്ള സ്റ്റൈൽ */
     padding: 20px;
-    /* active-ൽ ഉള്ള സ്റ്റൈൽ */
     background-color: #526182;
-    /* active-ൽ ഉള്ള സ്റ്റൈൽ */
-    /* മറ്റ് active സ്റ്റൈലുകൾ */
   }
 
   .game-section .item .image-placeholder {
     display: block;
-    /* active-ൽ ഉള്ള സ്റ്റൈൽ */
     width: 100%;
-    /* active-ൽ ഉള്ള സ്റ്റൈൽ */
     min-height: 250px;
     background-size: cover;
     background-position: center;
@@ -1466,16 +1445,10 @@ footer {
   .game-section .item .item-content h3,
   .game-section .item .item-content .details {
     display: block !important;
-    /* active-ൽ ഉള്ള സ്റ്റൈലുകൾ കാണിക്കാൻ */
     color: #ffffff;
-    /* active-ൽ ഉള്ള സ്റ്റൈൽ */
-    /* ആവശ്യമായ മറ്റ് സ്റ്റൈലുകൾ active-ൽ നിന്ന് ഇവിടെ കോപ്പി ചെയ്യുക */
   }
 
-  /* .item.active ലോജിക് ഡെസ്ക്ടോപ്പിന് മാത്രം പരിമിതപ്പെടുത്തുക */
-  .game-section .item.active {
-    /* ഇത് ഇവിടെ നൽകിയിട്ടുള്ള .item സ്റ്റൈലിനെ override ചെയ്യുന്നില്ലെന്ന് ഉറപ്പാക്കുക */
-  }
+  
 }
 
 @media (max-width: 767px) {

@@ -185,8 +185,7 @@ $(document).ready(function () {
 
     const owl = $carousel.data("owl.carousel");
 
-    // 2️⃣ Remove item click handler (completely disabled)
-    // (Previously had logic for click-to-active — removed.)
+    
 
     // 3️⃣ Custom Navigation Buttons (only control allowed)
     $(".custom-prev-btn").on("click", function () {
@@ -258,7 +257,7 @@ window.addEventListener("load", () => {
             duration: 0.8,
             stagger: 0.05
         },
-        "-=0.3" // overlaps slightly for smoother flow
+        "-=0.3" 
     );
 });
 
@@ -270,44 +269,30 @@ gsap.registerPlugin(ScrollTrigger);
 
 window.addEventListener("load", () => {
 
-    // .animated-text-p എന്ന ക്ലാസ്സുള്ള എല്ലാ p ടാഗുകളെയും തിരഞ്ഞെടുക്കുന്നു
     const paragraphs = gsap.utils.toArray(".animated-text-p");
 
-    // ഈ പാരഗ്രാഫുകളിൽ ഓരോന്നിലും ആനിമേഷൻ ലൂപ്പ് ചെയ്യുന്നു
     paragraphs.forEach((paragraph) => {
-        // ഓരോ പാരഗ്രാഫിനെയും SplitType ഉപയോഗിച്ച് വാക്കുകളായി വിഭജിക്കുന്നു
         const paragraphSplit = new SplitType(paragraph, {
             types: "words"
         });
 
-        // Initial state (Start position: x=100, opacity=0)
-        // NOTE: This initial set is technically part of the animation timeline,
-        // but we set it here to ensure the text is hidden before scroll
+       
         gsap.set(paragraphSplit.words, {
             x: 100,
             opacity: 0
         });
 
-        // Animation Timeline
         const tl = gsap.timeline({
             ease: "power3.out",
-            // ScrollTrigger-ൽ, trigger ആയി ഇപ്പോൾ ആ പാരഗ്രാഫ് തന്നെ നൽകുന്നു
             scrollTrigger: {
-                trigger: paragraph, // ഓരോ പാരഗ്രാഫ് കാണുമ്പോഴും ആനിമേഷൻ തുടങ്ങും
+                trigger: paragraph, 
                 start: "top 80%",
 
-                // 🛑 THE KEY CHANGE IS HERE! 🛑
-                // Action sequence: onEnter, onLeave, onEnterBack, onLeaveBack
-                // When scrolling down and element enters: PLAY
-                // When scrolling down and element leaves: REVERSE (hides)
-                // When scrolling up and element enters back: PLAY (shows)
-                // When scrolling up and element leaves back: REVERSE (hides)
+                
                 toggleActions: "play reverse play reverse",
-                // markers: true, // Uncomment this line to see the start/end points for debugging
             }
         });
 
-        // Paragraph - Slide From Right
         tl.to(paragraphSplit.words, {
             x: 0,
             opacity: 1,

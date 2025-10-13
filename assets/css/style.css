@@ -31,13 +31,7 @@ body {
   transition: 0.3s;
 }
 
-.animated-text-p {
-  overflow: hidden;
-  /* Kept for paragraph animation initial state */
-  max-width: 650px;
-  margin-left: auto;
-  margin-right: auto;
-}
+
 
 /* nav */
 

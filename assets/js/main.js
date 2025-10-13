@@ -185,7 +185,7 @@ $(document).ready(function () {
 
     const owl = $carousel.data("owl.carousel");
 
-    
+
 
     // 3️⃣ Custom Navigation Buttons (only control allowed)
     $(".custom-prev-btn").on("click", function () {
@@ -257,7 +257,7 @@ window.addEventListener("load", () => {
             duration: 0.8,
             stagger: 0.05
         },
-        "-=0.3" 
+        "-=0.3"
     );
 });
 
@@ -269,35 +269,40 @@ gsap.registerPlugin(ScrollTrigger);
 
 window.addEventListener("load", () => {
 
+    // .animated-text-p എന്ന ക്ലാസ്സുള്ള എല്ലാ p ടാഗുകളെയും തിരഞ്ഞെടുക്കുന്നു
     const paragraphs = gsap.utils.toArray(".animated-text-p");
 
+    // ഈ പാരഗ്രാഫുകളിൽ ഓരോന്നിലും ആനിമേഷൻ ലൂപ്പ് ചെയ്യുന്നു
     paragraphs.forEach((paragraph) => {
+        // SplitType: 'chars' (Characters/അക്ഷരങ്ങൾ)
         const paragraphSplit = new SplitType(paragraph, {
-            types: "words"
+            types: "chars"
         });
 
-       
-        gsap.set(paragraphSplit.words, {
-            x: 100,
+        // Initial state: അക്ഷരങ്ങൾ പൂർണ്ണമായും മറഞ്ഞിരിക്കുന്നു (opacity: 0)
+        gsap.set(paragraphSplit.chars, {
             opacity: 0
         });
 
+        // Animation Timeline
         const tl = gsap.timeline({
-            ease: "power3.out",
+            // 🛑 മാറ്റം 1: power1.out എന്നതിൽ നിന്ന് power2.out ലേക്ക് മാറ്റി
+            ease: "power2.out",
+            // ScrollTrigger: വീണ്ടും വരുമ്പോൾ ആനിമേഷൻ വർക്ക് ചെയ്യാനായി "play reverse play reverse" നിലനിർത്തി
             scrollTrigger: {
-                trigger: paragraph, 
+                trigger: paragraph,
                 start: "top 80%",
-
-                
                 toggleActions: "play reverse play reverse",
             }
         });
 
-        tl.to(paragraphSplit.words, {
-            x: 0,
+        // Letters Fade In Animation:
+        tl.to(paragraphSplit.chars, {
             opacity: 1,
-            duration: 0.8,
-            stagger: 0.05
+            // 🛑 മാറ്റം 2: duration 0.05 ൽ നിന്ന് 0.1 ലേക്ക് വർദ്ധിപ്പിച്ചു
+            duration: 0.1,
+            // 🛑 മാറ്റം 3: stagger 0.015 ൽ നിന്ന് 0.025 ലേക്ക് വർദ്ധിപ്പിച്ചു
+            stagger: 0.035
         });
     });
 });

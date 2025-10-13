@@ -795,6 +795,10 @@ p.section-description {
   transition: all 0.3s ease;
 }
 
+.faq-item.active{
+  border: 1px solid #03858C;
+}
+
 .faq-question {
   padding: 18px 20px;
   font-weight: 700;
@@ -830,7 +834,7 @@ p.section-description {
   overflow: hidden;
   padding: 0 20px;
   color: #6b7280;
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: 1.6;
   transition: all 0.3s ease;
 }
@@ -838,6 +842,7 @@ p.section-description {
 .faq-item.active .faq-answer {
   max-height: 500px;
   padding: 0 20px 20px 20px;
+  color: #8F7D6A;
 }
 
 .expert-box {

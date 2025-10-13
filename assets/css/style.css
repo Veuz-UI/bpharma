@@ -130,9 +130,9 @@ body {
     }
 
     @media (max-width: 1199.98px) {
-      .navbar-expand-xl .navbar-collapse {
+      /* .navbar-expand-xl .navbar-collapse {
         display: none !important;
-      }
+      } */
       .navbar-expand-xl .navbar-toggler {
         display: block !important;
       }

@@ -745,7 +745,7 @@ p.section-description {
 
   .page_nav_link .nav-item .nav-link {
     padding: 10px 0;
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .lang-switch {
@@ -758,6 +758,14 @@ p.section-description {
 
   .header-nav {
     gap: 0 !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+
+  .page_nav_link .nav-item .nav-link {
+    padding: 10px 0;
+    font-size: 12px;
   }
 }
 

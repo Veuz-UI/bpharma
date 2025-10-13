@@ -94,7 +94,7 @@ body {
 .banner_title {
   color: #fff;
   padding: 0px 0px 100px 0px;
-    max-width: 700px;
+  max-width: 700px;
 
 
 }
@@ -112,7 +112,7 @@ body {
 }
 
 .banner_title p {
-  
+
   overflow: hidden;
   max-width: 650px;
 }
@@ -122,7 +122,7 @@ body {
   overflow: hidden;
 }
 
- 
+
 
 
 
@@ -231,7 +231,8 @@ body {
   display: inline-block;
   padding-right: 30px;
   background: transparent;
-font-family: 'Academy Engraved LET', sans-serif;}
+  font-family: 'Academy Engraved LET', sans-serif;
+}
 
 @keyframes marquee {
   0% {
@@ -480,22 +481,24 @@ p.section-description {
 
 @media (max-width: 768px) {
 
-  .header-content{
+  .header-content {
     flex-direction: column;
     gap: 1rem !important;
     align-items: start !important;
   }
+
   .header-section {
     display: flex;
     justify-content: space-between;
     align-items: start !important;
     margin-bottom: 50px;
     flex-direction: column;
-}
+  }
 
-  .home_bg{
+  .home_bg {
     height: 900px;
   }
+
   .service-card {
     flex-direction: column;
   }
@@ -890,24 +893,26 @@ p.section-description {
 
 @media (max-width: 991px) {
 
-  .game-section .item-content .number{
+  .game-section .item-content .number {
     font-size: 24px !important;
   }
-  .game-section .item-content h3{
+
+  .game-section .item-content h3 {
     margin-bottom: 20px !important;
-font-size: 24px;
+    font-size: 24px;
     line-height: 26px;
   }
 
-      .header-content {
-        flex-direction: column;
-        gap: 1rem !important;
-        align-items: start !important;
-    }
+  .header-content {
+    flex-direction: column;
+    gap: 1rem !important;
+    align-items: start !important;
+  }
 
-  .game-section .container{
+  .game-section .container {
     margin-right: auto !important;
   }
+
   .expert-box {
     position: relative;
   }
@@ -1126,6 +1131,7 @@ footer {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -1235,11 +1241,12 @@ footer {
   font-size: 18px;
 }
 
-.custom-next-btn{
-background-color: #03858C;
+.custom-next-btn {
+  background-color: #03858C;
 }
-.custom-prev-btn{
-background-color: #4D6184;
+
+.custom-prev-btn {
+  background-color: #4D6184;
 }
 
 .game-section .owl-theme.custom-carousel .owl-dots {
@@ -1256,9 +1263,9 @@ background-color: #4D6184;
   display: flex;
 }
 
-.game-section .container{
+.game-section .container {
   width: 100% !important;
-  margin-right: 0 ;
+  margin-right: 0;
 }
 
 .game-section .item {
@@ -1272,7 +1279,7 @@ background-color: #4D6184;
   display: block;
   align-items: stretch;
   transition: width 0.5s ease-in-out, background 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
-    cursor: pointer;
+  cursor: pointer;
   height: 100%;
 }
 
@@ -1402,57 +1409,68 @@ background-color: #4D6184;
   .game-section .item.active .image-placeholder {
     min-height: 250px;
   }
+
   .game-section .item {
-      width: 100% !important;
-      height: auto;
-      min-height: 450px;
-    }
+    width: 100% !important;
+    height: auto;
+    min-height: 450px;
+  }
 
-    .game-section .item.active {
-      width: 100% !important;
-      flex-direction: column;
-    }
-    .game-section .item {
-      width: 100% !important;
-      height: auto;
-      min-height: 450px;
-      
-      /* Active സ്റ്റൈലുകൾ ഇവിടെ നൽകുക, അപ്പോൾ എല്ലാ ഐറ്റവും ഒരേപോലെയാകും */
-      background: var(--color-primary); /* #526182 ൻ്റെ സ്റ്റൈലുകൾ ഇവിടെ കോപ്പി ചെയ്യുക */
-      color: #ffffff;
-      display: flex;
-      flex-direction: column; /* ഇത് മൊബൈൽ സ്‌ക്രീൻ സ്റ്റൈലുമായി മാച്ച് ചെയ്യുന്നു */
-      padding: 0;
-    }
+  .game-section .item.active {
+    width: 100% !important;
+    flex-direction: column;
+  }
 
-    .game-section .item-content {
-        width: 100%; /* active-ൽ ഉള്ള സ്റ്റൈൽ */
-        padding: 20px; /* active-ൽ ഉള്ള സ്റ്റൈൽ */
-        background-color: #526182; /* active-ൽ ഉള്ള സ്റ്റൈൽ */
-        /* മറ്റ് active സ്റ്റൈലുകൾ */
-    }
+  .game-section .item {
+    width: 100% !important;
+    height: auto;
+    min-height: 450px;
 
-    .game-section .item .image-placeholder {
-      display: block; /* active-ൽ ഉള്ള സ്റ്റൈൽ */
-      width: 100%; /* active-ൽ ഉള്ള സ്റ്റൈൽ */
-      min-height: 250px;
-      background-size: cover;
-      background-position: center;
-      border-radius: 0;
-    }
-    
-    .game-section .item .item-content .number,
-    .game-section .item .item-content h3,
-    .game-section .item .item-content .details {
-        display: block !important; /* active-ൽ ഉള്ള സ്റ്റൈലുകൾ കാണിക്കാൻ */
-        color: #ffffff; /* active-ൽ ഉള്ള സ്റ്റൈൽ */
-        /* ആവശ്യമായ മറ്റ് സ്റ്റൈലുകൾ active-ൽ നിന്ന് ഇവിടെ കോപ്പി ചെയ്യുക */
-    }
+    /* Active സ്റ്റൈലുകൾ ഇവിടെ നൽകുക, അപ്പോൾ എല്ലാ ഐറ്റവും ഒരേപോലെയാകും */
+    background: var(--color-primary);
+    /* #526182 ൻ്റെ സ്റ്റൈലുകൾ ഇവിടെ കോപ്പി ചെയ്യുക */
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    /* ഇത് മൊബൈൽ സ്‌ക്രീൻ സ്റ്റൈലുമായി മാച്ച് ചെയ്യുന്നു */
+    padding: 0;
+  }
 
-    /* .item.active ലോജിക് ഡെസ്ക്ടോപ്പിന് മാത്രം പരിമിതപ്പെടുത്തുക */
-    .game-section .item.active {
-        /* ഇത് ഇവിടെ നൽകിയിട്ടുള്ള .item സ്റ്റൈലിനെ override ചെയ്യുന്നില്ലെന്ന് ഉറപ്പാക്കുക */
-    }
+  .game-section .item-content {
+    width: 100%;
+    /* active-ൽ ഉള്ള സ്റ്റൈൽ */
+    padding: 20px;
+    /* active-ൽ ഉള്ള സ്റ്റൈൽ */
+    background-color: #526182;
+    /* active-ൽ ഉള്ള സ്റ്റൈൽ */
+    /* മറ്റ് active സ്റ്റൈലുകൾ */
+  }
+
+  .game-section .item .image-placeholder {
+    display: block;
+    /* active-ൽ ഉള്ള സ്റ്റൈൽ */
+    width: 100%;
+    /* active-ൽ ഉള്ള സ്റ്റൈൽ */
+    min-height: 250px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 0;
+  }
+
+  .game-section .item .item-content .number,
+  .game-section .item .item-content h3,
+  .game-section .item .item-content .details {
+    display: block !important;
+    /* active-ൽ ഉള്ള സ്റ്റൈലുകൾ കാണിക്കാൻ */
+    color: #ffffff;
+    /* active-ൽ ഉള്ള സ്റ്റൈൽ */
+    /* ആവശ്യമായ മറ്റ് സ്റ്റൈലുകൾ active-ൽ നിന്ന് ഇവിടെ കോപ്പി ചെയ്യുക */
+  }
+
+  /* .item.active ലോജിക് ഡെസ്ക്ടോപ്പിന് മാത്രം പരിമിതപ്പെടുത്തുക */
+  .game-section .item.active {
+    /* ഇത് ഇവിടെ നൽകിയിട്ടുള്ള .item സ്റ്റൈലിനെ override ചെയ്യുന്നില്ലെന്ന് ഉറപ്പാക്കുക */
+  }
 }
 
 @media (max-width: 767px) {

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     
+    <meta charset="UTF-8" />
+     
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>GSAP ScrollTrigger Paragraph Animation Only</title>
+
+       
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+      <script src="https://unpkg.com/split-type"></script>
+
+      <style>
+        /* ✅ Reset & Layout */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #f8fbff 0%, #eef3ff 100%);
+            color: #0b1e3d;
+            overflow-x: hidden;
+            /* Added height to enable scrolling */
+            min-height: 200vh;
+        }
+
+        /* A section just to push the 'About' section down for demonstration */
+        .placeholder_section {
+            height: 100vh;
+            /* Make it one full screen height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #eef3ff;
+            font-size: 2rem;
+            color: #444;
+        }
+
+        /* ✅ About Section */
+        .about_section {
+            text-align: center;
+            padding: 120px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #fff;
+        }
+
+        .about_title h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.2;
+            /* Removed overflow: hidden so it doesn't clip the heading's default state */
+        }
+
+        .about_title h2 span {
+            color: #0d6efd;
+        }
+
+        .about_title p {
+            font-size: 1.1rem;
+            color: #444;
+            line-height: 1.8;
+            margin-top: 1.5rem;
+            overflow: hidden;
+            /* Kept for paragraph animation initial state */
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ✅ Responsive */
+        @media (max-width: 768px) {
+            .about_title h2 {
+                font-size: 2rem;
+            }
+
+            .about_title p {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+      <section class="placeholder_section">
+            Scroll Down to See the About Section Animation
+          </section>
+     
+      <section class="about_section" id="aboutSection">
+            <div class="about_title">
+                        <h2>
+                        Driving <span>Innovation</span><br />
+                        Through <span>Excellence</span>
+                      </h2>
+                  <p id="animatedParagraph">
+                        We deliver innovative solutions that transform industries and empower businesses to reach their
+                full potential
+                        with creativity and precision.
+                      </p>
+                </div>
+          </section>
+
+        <script>
+        // Register the ScrollTrigger plugin
+        gsap.registerPlugin(ScrollTrigger);
+
+        window.addEventListener("load", () => {
+            // Only split the paragraph
+            const paragraphSplit = new SplitType("#animatedParagraph", {
+                types: "words"
+            });
+
+            // Create a GSAP Context
+            let ctx = gsap.context(() => {
+
+                // Initial state for Paragraph (Start position: x=100, opacity=0)
+                gsap.set(paragraphSplit.words, {
+                    x: 100,
+                    opacity: 0
+                });
+
+                // Animation Timeline
+                const tl = gsap.timeline({
+                    ease: "power3.out",
+                    // Attaching the timeline to ScrollTrigger
+                    scrollTrigger: {
+                        trigger: "#aboutSection", // The element that triggers the animation
+                        start: "top 80%", // Start the animation when the top of the trigger is 80% down the viewport
+                        toggleActions: "play none none none", // Play the animation once when entering
+                        // markers: true, // Uncomment this line to see the start/end points for debugging
+                    }
+                });
+
+                // Paragraph - Slide From Right (The only animation remaining)
+                tl.to(paragraphSplit.words, {
+                    x: 0, // Final position (back to original)
+                    opacity: 1, // Final opacity
+                    duration: 0.8,
+                    stagger: 0.05
+                });
+
+            }, document.body);
+
+        });
+    </script>
+</body>
+
+</html>

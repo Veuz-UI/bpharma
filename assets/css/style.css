@@ -88,26 +88,55 @@ body {
   /* margin-top: 20px; */
 }
 
+
 .banner_title {
   color: #fff;
   padding: 0px 0px 100px 0px;
+    max-width: 700px;
+
+
 }
 
 .banner_title h2 {
-  font-size: 70px;
+  font-size: 76px;
   font-weight: 800;
   line-height: 60px;
+  overflow: hidden;
 }
 
 .banner_title h2 span {
-  font-size: 50px;
+  font-size: 64px;
   font-weight: 400;
+}
+
+.banner_title p {
+  
+  overflow: hidden;
+  max-width: 650px;
 }
 
 .banner-content {
   width: 50%;
   overflow: hidden;
 }
+
+ @media (min-width: 1200px) {
+      .navbar-expand-xl .navbar-collapse {
+        display: flex !important;
+      }
+      .navbar-expand-xl .navbar-toggler {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 1199.98px) {
+      .navbar-expand-xl .navbar-collapse {
+        display: none !important;
+      }
+      .navbar-expand-xl .navbar-toggler {
+        display: block !important;
+      }
+    }
 
 
 
@@ -132,7 +161,7 @@ body {
 }
 
 .slide h3 {
-  font-size: 16px;
+  font-size: 15px;
   padding: 10px;
   color: #333;
   font-weight: 500;
@@ -732,7 +761,7 @@ p.section-description {
 
   .page_nav_link .nav-item .nav-link {
     padding: 10px 0;
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .lang-switch {
@@ -1096,6 +1125,32 @@ footer {
   font-size: 0.8rem;
   margin: 0;
 }
+
+/* Smooth fade effect when active item changes */
+.item.fade-in {
+  animation: fadeInUp 0.6s ease-in-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Optional: active item highlight */
+.item.active {
+  transform: scale(1);
+  transition: transform 2s ease;
+}
+
+
+
+
 
 /* --- Responsive Design --- */
 @media (max-width: 991px) {

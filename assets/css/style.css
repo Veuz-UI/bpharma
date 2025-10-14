@@ -547,6 +547,14 @@ p.section-description {
   background-image: url("../img/bullet-point-even.svg");
 }
 
+@media (max-width: 400px){
+.banner_title h2,
+  .banner_title h2 span {
+    font-size: 38px !important;
+    line-height: 42px;
+  }
+}
+
 
 @media (max-width: 768px) {
 
@@ -574,8 +582,7 @@ p.section-description {
 
   .banner_title h2,
   .banner_title h2 span {
-    font-size: 40px;
-    line-height: 46px;
+    font-size: 46px;
   }
 
   .service-card {

@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Active card update function
 function updateActiveItem($carousel) {
-    // Mobile: all items active
+    // Mobile: all items active (Less than 768px)
     if ($(window).width() < 768) {
         $carousel.find(".item").addClass("active");
         return;
@@ -107,6 +107,7 @@ function updateActiveItem($carousel) {
 
     // Desktop: remove previous active and add to first visible
     $carousel.find(".item").removeClass("active");
+    // Owl Carousel 'active' ക്ലാസ് ഉള്ള ആദ്യത്തെ ഐറ്റം കണ്ടെത്തുന്നു
     const firstVisibleItem = $carousel.find(".owl-item.active").first().find(".item");
 
     if (firstVisibleItem.length) {
@@ -118,9 +119,8 @@ function updateActiveItem($carousel) {
     }
 }
 
-$(document).ready(function () {
-    const $carousel = $(".custom-carousel");
-
+// 💡 Function to Initialize Owl Carousel with all settings
+function initializeCarousel($carousel) {
     // 1️⃣ Initialize Owl Carousel
     $carousel.owlCarousel({
         autoWidth: true,
@@ -178,16 +178,72 @@ $(document).ready(function () {
             updateActiveItem($carousel);
         },
         onResized: function () {
-            $carousel.trigger("refresh.owl.carousel");
-            updateActiveItem($carousel);
+            // Owl Carousel-ന്റെ resize ഇവന്റ്. updateActiveItem മാത്രം വിളിക്കുന്നു.
+            if ($(window).width() >= 768) {
+                updateActiveItem($carousel);
+            }
         },
     });
 
-    const owl = $carousel.data("owl.carousel");
+    // Custom Navigation-ന് വേണ്ടി owl object തിരികെ നൽകുന്നു
+    return $carousel.data("owl.carousel");
+}
 
+// 💡 Function to handle Maximize/Restore events via window resize
+let previousWidth = $(window).width();
+let resizeTimer;
 
+function handleWindowResize($carousel, initializationFunction) {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+        const currentWidth = $(window).width();
+        
+        // Breakpoint മാറുകയാണോ എന്ന് പരിശോധിക്കുന്നു
+        const isBreakpointChange = 
+            (previousWidth < 768 && currentWidth >= 768) ||
+            (previousWidth >= 768 && currentWidth < 768);
 
-    // 3️⃣ Custom Navigation Buttons (only control allowed)
+        // വലുപ്പത്തിൽ വലിയ മാറ്റം (Maximize/Restore) ഉണ്ടോ എന്ന് പരിശോധിക്കുന്നു (ഒരു വലിയ ജമ്പ്).
+        const isMajorResize = Math.abs(currentWidth - previousWidth) > 50; 
+
+        if (isBreakpointChange || isMajorResize) { 
+            
+            // നിലവിലുള്ള കാറൗസൽ destroy ചെയ്യുക (ഉള്ളടക്കം നഷ്ടപ്പെടാതെ)
+            if ($carousel.data("owl.carousel")) {
+                $carousel.data("owl.carousel").destroy();
+                // ⚠️ പ്രധാന മാറ്റം: $carousel.empty() ഇവിടെ ഒഴിവാക്കിയിരിക്കുന്നു 
+                // ഉള്ളടക്കം (കാർഡുകൾ) നിലനിർത്താൻ വേണ്ടിയാണിത്.
+            }
+            
+            // കാറൗസൽ re-initialize ചെയ്യുക
+            const owl = initializationFunction($carousel);
+
+            // Custom Navigation വീണ്ടും സെറ്റ് ചെയ്യുക (Re-bind Custom Navigation)
+            $(".custom-prev-btn").off("click").on("click", function () {
+                owl.prev();
+            });
+            $(".custom-next-btn").off("click").on("click", function () {
+                owl.next();
+            });
+
+        } else {
+            // ചെറിയ resize-കൾക്ക് refresh മാത്രം മതി
+            $carousel.trigger("refresh.owl.carousel");
+        }
+
+        updateActiveItem($carousel); // active item അപ്‌ഡേറ്റ് ചെയ്യുക
+        previousWidth = currentWidth; // അടുത്ത താരതമ്യത്തിനായി നിലവിലെ വലുപ്പം സംഭരിക്കുക
+
+    }, 300); // Debounce time
+}
+
+$(document).ready(function () {
+    const $carousel = $(".custom-carousel");
+
+    // 1️⃣ Initial initialization
+    let owl = initializeCarousel($carousel);
+
+    // 2️⃣ Custom Navigation Buttons (only control allowed)
     $(".custom-prev-btn").on("click", function () {
         owl.prev();
     });
@@ -196,24 +252,19 @@ $(document).ready(function () {
         owl.next();
     });
 
-    // 4️⃣ When slide changes — update active item
+    // 3️⃣ When slide changes — update active item
     $carousel.on("translated.owl.carousel", function () {
         if ($(window).width() >= 768) {
             updateActiveItem($carousel);
         }
     });
 
-    // 5️⃣ Handle resize gracefully
-    let resizeTimer;
+    // 4️⃣ Handle Maximize/Restore/Resize gracefully
     $(window).on("resize", function () {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function () {
-            $carousel.trigger("refresh.owl.carousel");
-            updateActiveItem($carousel);
-        }, 300);
+        // resize ഇവന്റിൽ destroy & re-initialize ലോജിക് വിളിക്കുന്നു.
+        handleWindowResize($carousel, initializeCarousel);
     });
 });
-
 
 /* ✅ GSAP Animation */
 window.addEventListener("load", () => {

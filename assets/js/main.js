@@ -3,24 +3,23 @@ $(document).ready(function () {
     const $owl = $('#owl-slider');
     const $navSpans = $('.slider-nav span');
 
-    // --- Owl Carousel Initialization ---
     $owl.owlCarousel({
-        loop: true, // Infinite loop
-        margin: 20, // Gap between slides (20px)
-        nav: false, // Hide default arrows
-        dots: false, // Hide default dots
-        autoplay: true, // Auto slide enabled
+        loop: true, 
+        margin: 20, 
+        nav: false, 
+        dots: false, 
+        autoplay: true, 
         autoplayTimeout: 5000,
-        autoplayHoverPause: true, // Pause on hover
-        mouseDrag: true, // Draggable feature enabled
+        autoplayHoverPause: true, 
+        mouseDrag: true, 
         responsive: {
-            0: { // For screens < 576px (Mobile: 1.5 slides)
+            0: { 
                 items: 1.5,
             },
-            576: { // For screens >= 576px (Tablet: 2.5 slides)
+            576: { 
                 items: 2.5,
             },
-            992: { // For screens >= 992px (Desktop: 3.5 slides)
+            992: { 
                 items: 3.5,
             }
         }
@@ -28,21 +27,17 @@ $(document).ready(function () {
 
     // --- Custom Navigation Logic ---
 
-    // 1. Click handling for custom number navigation
+    
     $navSpans.on('click', function () {
-        // Stop autoplay when a user clicks a number
         $owl.trigger('stop.owl.autoplay');
 
         const index = $(this).data('slide-to');
 
-        // Go to the corresponding slide index
         $owl.trigger('to.owl.carousel', [index, 500, true]);
 
-        // Update active class immediately
         $navSpans.removeClass('active');
         $(this).addClass('active');
 
-        // Restart autoplay after a short delay
         setTimeout(function () {
             $owl.trigger('play.owl.autoplay', [3000]);
         }, 1000);
@@ -50,15 +45,12 @@ $(document).ready(function () {
 
     // 2. Update custom navigation active state on slide change (drag/autoplay)
     $owl.on('changed.owl.carousel', function (event) {
-        // Find the index of the current active slide (0 to totalSlides-1)
         const currentItemIndex = event.item.index;
         const totalItems = event.item.count;
         const totalOriginalItems = $navSpans.length;
 
-        // Owl Carousel uses cloning, so we need to map the cloned index back to the original index
         let originalIndex = (currentItemIndex % totalOriginalItems);
 
-        // Sometimes Owl's logic results in index mapping to the last clone before 0. This normalizes it.
         if (originalIndex >= totalOriginalItems) {
             originalIndex = 0;
         }
@@ -105,9 +97,7 @@ function updateActiveItem($carousel) {
         return;
     }
 
-    // Desktop: remove previous active and add to first visible
     $carousel.find(".item").removeClass("active");
-    // Owl Carousel 'active' ക്ലാസ് ഉള്ള ആദ്യത്തെ ഐറ്റം കണ്ടെത്തുന്നു
     const firstVisibleItem = $carousel.find(".owl-item.active").first().find(".item");
 
     if (firstVisibleItem.length) {
@@ -178,14 +168,12 @@ function initializeCarousel($carousel) {
             updateActiveItem($carousel);
         },
         onResized: function () {
-            // Owl Carousel-ന്റെ resize ഇവന്റ്. updateActiveItem മാത്രം വിളിക്കുന്നു.
             if ($(window).width() >= 768) {
                 updateActiveItem($carousel);
             }
         },
     });
 
-    // Custom Navigation-ന് വേണ്ടി owl object തിരികെ നൽകുന്നു
     return $carousel.data("owl.carousel");
 }
 
@@ -198,27 +186,20 @@ function handleWindowResize($carousel, initializationFunction) {
     resizeTimer = setTimeout(function () {
         const currentWidth = $(window).width();
         
-        // Breakpoint മാറുകയാണോ എന്ന് പരിശോധിക്കുന്നു
         const isBreakpointChange = 
             (previousWidth < 768 && currentWidth >= 768) ||
             (previousWidth >= 768 && currentWidth < 768);
 
-        // വലുപ്പത്തിൽ വലിയ മാറ്റം (Maximize/Restore) ഉണ്ടോ എന്ന് പരിശോധിക്കുന്നു (ഒരു വലിയ ജമ്പ്).
         const isMajorResize = Math.abs(currentWidth - previousWidth) > 50; 
 
         if (isBreakpointChange || isMajorResize) { 
             
-            // നിലവിലുള്ള കാറൗസൽ destroy ചെയ്യുക (ഉള്ളടക്കം നഷ്ടപ്പെടാതെ)
             if ($carousel.data("owl.carousel")) {
                 $carousel.data("owl.carousel").destroy();
-                // ⚠️ പ്രധാന മാറ്റം: $carousel.empty() ഇവിടെ ഒഴിവാക്കിയിരിക്കുന്നു 
-                // ഉള്ളടക്കം (കാർഡുകൾ) നിലനിർത്താൻ വേണ്ടിയാണിത്.
             }
             
-            // കാറൗസൽ re-initialize ചെയ്യുക
             const owl = initializationFunction($carousel);
 
-            // Custom Navigation വീണ്ടും സെറ്റ് ചെയ്യുക (Re-bind Custom Navigation)
             $(".custom-prev-btn").off("click").on("click", function () {
                 owl.prev();
             });
@@ -227,12 +208,11 @@ function handleWindowResize($carousel, initializationFunction) {
             });
 
         } else {
-            // ചെറിയ resize-കൾക്ക് refresh മാത്രം മതി
             $carousel.trigger("refresh.owl.carousel");
         }
 
-        updateActiveItem($carousel); // active item അപ്‌ഡേറ്റ് ചെയ്യുക
-        previousWidth = currentWidth; // അടുത്ത താരതമ്യത്തിനായി നിലവിലെ വലുപ്പം സംഭരിക്കുക
+        updateActiveItem($carousel); 
+        previousWidth = currentWidth; 
 
     }, 300); // Debounce time
 }
@@ -259,16 +239,13 @@ $(document).ready(function () {
         }
     });
 
-    // 4️⃣ Handle Maximize/Restore/Resize gracefully
     $(window).on("resize", function () {
-        // resize ഇവന്റിൽ destroy & re-initialize ലോജിക് വിളിക്കുന്നു.
         handleWindowResize($carousel, initializeCarousel);
     });
 });
 
 /* ✅ GSAP Animation */
 window.addEventListener("load", () => {
-    // Split the heading into characters and the paragraph into words
     const headingSplit = new SplitType("#animatedHeading", {
         types: "chars"
     });
